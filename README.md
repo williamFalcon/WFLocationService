@@ -7,6 +7,8 @@ Written 100% in Swift
 2. Add the [NSLocationWhenInUseUsageDescription] (https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html) or [NSLocationAlwaysUsageDescription] (https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html) key to your info.plist   
 
 ###Get a location    
+- Calling this method requests location services authorization then handles result accordingly.    
+- Will be called multiple times if a more accurate location is found.   
 ````swift
 LocationService.getCurrentLocationOnSuccess({ (latitude, longitude) -> () in
     //Do something with Latitude and Longitude
