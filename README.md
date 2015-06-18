@@ -11,7 +11,7 @@ Written 100% in Swift
 - Will be called multiple times if a more accurate location is found.   
 ````swift
 LocationService.getCurrentLocationWithProgress({ (latitude, longitude) -> () in
-    //Called when a better location is available
+    //Called when a better location is available (could be multiple times)
     
     }, onComplete: { (latitude, longitude, accuracy) -> () in
         //Called when update timer expires
