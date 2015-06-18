@@ -1,6 +1,6 @@
 //
 //  LocationService+LocationManagerDelegate.swift
-//  
+//
 //
 //  Created by William Falcon on 6/17/15.
 //  Copyright (c) 2015 William Falcon. All rights reserved.
@@ -56,12 +56,13 @@ extension LocationService : CLLocationManagerDelegate {
     
     ///Starts updating location if authorized
     private func startUpdatingLocationIfAuthorized(status: CLAuthorizationStatus) {
+        //CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways
         
         // Update delegate's location if user allows authorization
         println("LocationService: Authorization status changed")
         if canAccessLocation() {
             self.startUpdatingLocation()
-        }else {
+        }else if (status == CLAuthorizationStatus.Denied) {
             var error = NSError(domain: "LocationService", code: 1, userInfo: [NSLocalizedFailureReasonErrorKey:"User did not enable location services!"])
             failUpdateBlock?(error: error)
         }
