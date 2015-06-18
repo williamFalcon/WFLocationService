@@ -20,7 +20,7 @@ extension LocationService : CLLocationManagerDelegate {
         if wasBetter {
             var lat = loc.coordinate.latitude
             var lon = loc.coordinate.longitude
-            betterLocationFoundBlock?(latitude: lat, longitude: lon)
+            progressBlock?(latitude: lat, longitude: lon)
             
             //Print the new coordinates
             println("LocationService: Location updated:\nLat \(lat)\nLon \(lon)\n")
@@ -39,14 +39,18 @@ extension LocationService : CLLocationManagerDelegate {
         //get last location from manager.
         //if no last set, then use the newLocation
         var manager = LocationService.sharedInstance
-        var wasBetter = manager.lastKnownLocation == nil
+        var wasBetter = (manager.updateCount == 0)
+        if wasBetter {
+            manager.updateCount += 1
+        }
+        
         var lastKnown = manager.lastKnownLocation ?? newLocation
         
         //update if more accurate
         if lastKnown.horizontalAccuracy < newLocation.horizontalAccuracy {
             lastKnown = newLocation
             wasBetter = true
-            updateCount += 1
+            manager.updateCount += 1
         }
         
         //update manager

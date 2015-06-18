@@ -32,11 +32,25 @@ extension LocationService {
         self.locationTimer = NSTimer.scheduledTimerWithTimeInterval(LOCATION_STOP_TIMER_LENGTH_IN_SECONDS, target: self, selector: "stopUpdatingLocation", userInfo: nil, repeats: true)
     }
     
-
+    
     ///When requested to stop kill the manager and invalidate any timers that were active
     func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
         self.locationTimer?.invalidate()
         println("location manager stopped")
+        callCompleteBlockWithLocation(lastKnownLocation)
+    }
+    
+    private func callCompleteBlockWithLocation(location: CLLocation?) {
+        
+        if let loc = location {
+            var lat = loc.coordinate.latitude
+            var lon = loc.coordinate.longitude
+            var accuracy = loc.horizontalAccuracy
+            completeBlock?(latitude: lat, longitude: lon, accuracy: accuracy)
+            
+            //Print the new coordinates
+            println("\nLocationService: Final location:\nLat \(lat)\nLon \(lon)\nAccuracy:\(accuracy)\n")
+        }
     }
 }

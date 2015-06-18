@@ -24,17 +24,25 @@ extension LocationService {
     
     /**
     Gets current location.
-    Can be called multiple times if location accuracy improves.
     
     Handles requesting location permissions.
     Handles stopping the location manager automatically
+    
+    :param: progress Can be called multiple times when a more accurate location is available.
+    :param: complete Called once timer expires with the most accurate location found
+    :param: failure Called if something fails
     */
-    class func getCurrentLocationOnSuccess(success:((latitude:Double, longitude:Double)->()), onFailure failure:((error:NSError)->())?) {
+    class func getCurrentLocationWithProgress(progress:((latitude:Double, longitude:Double)->()), onComplete complete:((latitude:Double, longitude:Double, accuracy:Double)->())?, onFailure failure:((error:NSError)->())?) {
         
         var manager = LocationService.sharedInstance
         
         //will be called when a better location is found
-        manager.betterLocationFoundBlock = success
+        manager.progressBlock = progress
+        
+        //Called when timer expires
+        manager.completeBlock = complete
+        
+        //called on failure
         manager.failUpdateBlock = failure
         
         if manager.canAccessLocation() {

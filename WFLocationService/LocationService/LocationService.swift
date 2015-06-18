@@ -30,7 +30,8 @@ class LocationService: NSObject {
     //tracks last location and # of location updates
     var lastKnownLocation : CLLocation?
     var updateCount = 0
-    var betterLocationFoundBlock : ((latitude:Double, longitude:Double)->())?
+    var progressBlock : ((latitude:Double, longitude:Double)->())?
+    var completeBlock : ((latitude:Double, longitude:Double, accuracy:Double)->())?
     var failUpdateBlock : ((error:NSError)->())?
     
     //Location management
