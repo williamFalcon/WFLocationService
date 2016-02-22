@@ -17,7 +17,7 @@ extension LocationService {
         
         //request permission
         if isMinimumiOS8() {
-            print("\nLocationService: Requesting Authorization... If nothing happens, add the NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription key to your info.plist\n")
+            print("\nLocationService: Requesting Authorization... If nothing happens, add the NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription key to your info.plist\n\nSteps:\n1. Go to info.plist\n2. Add row.\n3. Add key NSLocationWhenInUseUsageDescription.\n4. Add message to key (this is what user will see as the prompt)")
             
             locationManager.requestWhenInUseAuthorization()
         }else {
