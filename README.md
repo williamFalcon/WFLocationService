@@ -10,7 +10,7 @@ Written 100% in Swift
 - Calling this method requests location services authorization then handles result accordingly.    
 - Will be called multiple times if a more accurate location is found.   
 ````swift
-LocationService.getCurrentLocationWithProgress({ (latitude, longitude) -> () in
+LocationService.getCurrentLocationWithProgress({ (latitude, longitude, accuracy, locationObj) -> () in
     //Called when a better location is available (could be multiple times)
     
     }, onComplete: { (latitude, longitude, accuracy) -> () in
