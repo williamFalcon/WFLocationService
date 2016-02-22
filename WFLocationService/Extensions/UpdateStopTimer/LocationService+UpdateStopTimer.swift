@@ -49,7 +49,7 @@ extension LocationService {
             let lat = loc.coordinate.latitude
             let lon = loc.coordinate.longitude
             let accuracy = loc.horizontalAccuracy
-            completeBlock?(latitude: lat, longitude: lon, accuracy: accuracy)
+            completeBlock?(latitude: lat, longitude: lon, accuracy: accuracy, locationObject: loc)
             
             //Print the new coordinates
             print("\nLocationService: Final location:\nLat \(lat)\nLon \(lon)\nAccuracy:\(accuracy)\n")

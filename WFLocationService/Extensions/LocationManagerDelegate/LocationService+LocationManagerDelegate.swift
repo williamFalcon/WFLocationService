@@ -20,8 +20,9 @@ extension LocationService : CLLocationManagerDelegate {
         if wasBetter {
             let lat = loc.coordinate.latitude
             let lon = loc.coordinate.longitude
-            progressBlock?(latitude: lat, longitude: lon)
-            
+            let accuracy = loc.horizontalAccuracy
+            progressBlock?(latitude: lat, longitude: lon, accuracy: accuracy, locationObject: loc)
+
             //Print the new coordinates
             print("LocationService: Location updated:\nLat \(lat)\nLon \(lon)\n")
         }

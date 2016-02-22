@@ -27,12 +27,16 @@ class LocationService: NSObject {
     var LOCATION_STOP_TIMER_LENGTH_IN_SECONDS : Double = 10.0
     var locationTimer : NSTimer?
     
+    typealias LocationProgressBlock = ((latitude:Double, longitude:Double, accuracy:Double,  locationObject:CLLocation)->())?
+    
+    
     //tracks last location and # of location updates
     var lastKnownLocation : CLLocation?
     var updateCount = 0
-    var progressBlock : ((latitude:Double, longitude:Double)->())?
-    var completeBlock : ((latitude:Double, longitude:Double, accuracy:Double)->())?
+    var progressBlock : LocationProgressBlock
+    var completeBlock : LocationProgressBlock
     var failUpdateBlock : ((error:NSError)->())?
+    
     
     //Location management
     var locationManager = CLLocationManager()

@@ -32,7 +32,7 @@ extension LocationService {
     :param: complete Called once timer expires with the most accurate location found
     :param: failure Called if something fails
     */
-    class func getCurrentLocationWithProgress(progress:((latitude:Double, longitude:Double)->()), onComplete complete:((latitude:Double, longitude:Double, accuracy:Double)->())?, onFailure failure:((error:NSError)->())?) {
+    class func getCurrentLocationWithProgress(progress:LocationProgressBlock, onComplete complete:LocationProgressBlock, onFailure failure:((error:NSError)->())?) {
         
         let manager = LocationService.sharedInstance
         
