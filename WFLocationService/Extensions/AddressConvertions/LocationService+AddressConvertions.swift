@@ -15,10 +15,10 @@ extension LocationService {
     func addressFromLocation(location:CLLocation!, completionClosure:((NSDictionary?)->())){
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-            var geoCoder = CLGeocoder()
+            let geoCoder = CLGeocoder()
             geoCoder.reverseGeocodeLocation(location, completionHandler: { (placeMarks, error) -> Void in
                 if let places = placeMarks {
-                    var marks = places[0] as! CLPlacemark
+                    let marks = places[0] 
                     completionClosure(marks.addressDictionary)
                 }else {
                     completionClosure(nil)
@@ -34,14 +34,14 @@ extension LocationService {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
             
             // assemble request
-            var addressNS:NSString = address as NSString
-            let range = NSRange(location: 0, length: addressNS.length)
+            //let addressNS:NSString = address as NSString
+            //let range = NSRange(location: 0, length: addressNS.length)
             
             // Replace white spaces with plus signs
-            var escapedAddress = addressNS.stringByReplacingOccurrencesOfString(" ", withString: "+")
+            //let escapedAddress = addressNS.stringByReplacingOccurrencesOfString(" ", withString: "+")
             
             //TODO: move API keys out of class
-            let requestURL = "https://maps.googleapis.com/maps/api/geocode/json?address=\(escapedAddress)&key=\(self.GOOGLE_PLACES_API_KEY)"
+            //let requestURL = "https://maps.googleapis.com/maps/api/geocode/json?address=\(escapedAddress)&key=\(self.GOOGLE_PLACES_API_KEY)"
             
             /*
             // Place request

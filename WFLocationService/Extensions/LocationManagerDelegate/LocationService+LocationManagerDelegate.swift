@@ -11,24 +11,24 @@ import CoreLocation
 
 extension LocationService : CLLocationManagerDelegate {
     
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
         
         //update own coordinates
-        var (loc, wasBetter) = mostAccurateLocation(newLocation)
+        let (loc, wasBetter) = mostAccurateLocation(newLocation)
         
         //update user only if the location is better
         if wasBetter {
-            var lat = loc.coordinate.latitude
-            var lon = loc.coordinate.longitude
+            let lat = loc.coordinate.latitude
+            let lon = loc.coordinate.longitude
             progressBlock?(latitude: lat, longitude: lon)
             
             //Print the new coordinates
-            println("LocationService: Location updated:\nLat \(lat)\nLon \(lon)\n")
+            print("LocationService: Location updated:\nLat \(lat)\nLon \(lon)\n")
         }
     }
     
     ///Called when user updates authorization
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         startUpdatingLocationIfAuthorized(status)
     }
@@ -38,7 +38,7 @@ extension LocationService : CLLocationManagerDelegate {
         
         //get last location from manager.
         //if no last set, then use the newLocation
-        var manager = LocationService.sharedInstance
+        let manager = LocationService.sharedInstance
         var wasBetter = (manager.updateCount == 0)
         if wasBetter {
             manager.updateCount += 1
@@ -63,11 +63,11 @@ extension LocationService : CLLocationManagerDelegate {
         //CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways
         
         // Update delegate's location if user allows authorization
-        println("LocationService: Authorization status changed")
+        print("LocationService: Authorization status changed")
         if canAccessLocation() {
             self.startUpdatingLocation()
         }else if (status == CLAuthorizationStatus.Denied) {
-            var error = NSError(domain: "LocationService", code: 1, userInfo: [NSLocalizedFailureReasonErrorKey:"User did not enable location services!"])
+            let error = NSError(domain: "LocationService", code: 1, userInfo: [NSLocalizedFailureReasonErrorKey:"User did not enable location services!"])
             failUpdateBlock?(error: error)
         }
     }

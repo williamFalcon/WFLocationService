@@ -12,12 +12,12 @@ import CoreLocation
 extension LocationService {
     
     ///Defaulted to 30 meters. Set here to update
-    class func setLocationAccuracy(#meters:Double) {
+    class func setLocationAccuracy(meters meters:Double) {
         LocationService.sharedInstance.LOCATION_ACCURACY = meters
     }
     
     //Defaulted to 10 seconds. Set here to update
-    class func setLocationUpdateTimeLimit(#seconds:Double) {
+    class func setLocationUpdateTimeLimit(seconds seconds:Double) {
         LocationService.sharedInstance.LOCATION_STOP_TIMER_LENGTH_IN_SECONDS = seconds
     }
     
@@ -34,7 +34,7 @@ extension LocationService {
     */
     class func getCurrentLocationWithProgress(progress:((latitude:Double, longitude:Double)->()), onComplete complete:((latitude:Double, longitude:Double, accuracy:Double)->())?, onFailure failure:((error:NSError)->())?) {
         
-        var manager = LocationService.sharedInstance
+        let manager = LocationService.sharedInstance
         
         //will be called when a better location is found
         manager.progressBlock = progress

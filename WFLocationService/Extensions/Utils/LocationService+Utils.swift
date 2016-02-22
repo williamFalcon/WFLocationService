@@ -17,7 +17,7 @@ extension LocationService {
         
         //request permission
         if isMinimumiOS8() {
-            println("\nLocationService: Requesting Authorization... If nothing happens, add the NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription key to your info.plist\n")
+            print("\nLocationService: Requesting Authorization... If nothing happens, add the NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription key to your info.plist\n")
             
             locationManager.requestWhenInUseAuthorization()
         }else {
@@ -26,13 +26,13 @@ extension LocationService {
     }
     
     func canAccessLocation() -> Bool {
-        var canAccessLocation = CLLocationManager.locationServicesEnabled() && (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse)
+        let canAccessLocation = CLLocationManager.locationServicesEnabled() && (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse)
         return canAccessLocation
     }
     
     ///Returns true if current device has iOS 8+
     private func isMinimumiOS8() -> Bool{
-        var version:NSString = UIDevice.currentDevice().systemVersion as NSString
+        let version:NSString = UIDevice.currentDevice().systemVersion as NSString
         return version.doubleValue >= 8
     }
 }

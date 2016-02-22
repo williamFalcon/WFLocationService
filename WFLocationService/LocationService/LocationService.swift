@@ -46,7 +46,7 @@ class LocationService: NSObject {
     Convenience accessor to the last location
     */
     class func lastLocation() -> CLLocationCoordinate2D{
-        var manager = LocationService.sharedInstance
+        let manager = LocationService.sharedInstance
         let lastKnown = manager.lastKnownLocation
         return lastKnown!.coordinate
     }
